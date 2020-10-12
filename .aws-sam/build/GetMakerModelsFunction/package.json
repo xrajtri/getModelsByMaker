@@ -1,0 +1,17 @@
+{
+  "name": "getmakermodels",
+  "version": "1.0.0",
+  "description": "Lambda function to get models detail based on the maker id",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "getmakermodels"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
+}

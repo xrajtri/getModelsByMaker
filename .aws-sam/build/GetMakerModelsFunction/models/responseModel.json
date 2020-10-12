@@ -1,0 +1,12 @@
+{
+    "statusCode":"",
+    "body":{
+        "status":"",
+        "response":{
+            "message":"Models data returned successfully.",
+            "makerId":"",
+            "makerName":"",
+            "modelData":[]
+        }
+    }
+}
