@@ -1,11 +1,11 @@
 const fetch = require("node-fetch");
-let api = require("./config/config.json");
+const apiUrl = require("./config/config.json");
 let responseModel = require("./models/responseModel.json");
 
 async function getModelData(makerId){
     try{
-        console.log("Calling api - "+api+makerId+"?format=json");
-        const response = await fetch(api+makerId+"?format=json");
+        console.log("Calling api - "+apiUrl.apiUrl+makerId+"?format=json");
+        const response = await fetch(apiUrl.apiUrl+makerId+"?format=json");
         const modelData = await response.json();
         let modelTempObj = {};
         let modelTempArray = [];
@@ -23,12 +23,14 @@ async function getModelData(makerId){
 }
 
 exports.lambdaHandler = async(event) =>{
-    if(!event && event != "" && event != null){
+    console.log("Event data = "+JSON.stringify(event));
+    if(!event || event != "" || event != null){
         console.log("Valid event submitted.");
-        console.log("Event = "+event);
-        if(!event.makerId && event.makerId != "" && event.makerId != null){
-            console.log("event.makerId submitted. "+event.makerId);
-            let makerId = event.makerId;
+        console.log("Event = "+JSON.stringify(event));
+        let body = JSON.parse(JSON.stringify(event));
+        if(!body.makerId || body.makerId != "" || body.makerId != null){
+            console.log("body.makerId submitted. "+body.makerId);
+            let makerId = body.makerId;
             let modelData = await getModelData(makerId);
             responseModel.body.status = "success";
             responseModel.body.response.makerId = modelData.makerId;
